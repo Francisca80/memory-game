@@ -1,6 +1,8 @@
 /*
  * Create a list that holds all of your cards
  */
+let cardArray= [" fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor","fa fa-bolt","fa fa-cube","fa fa-leaf","fa fa-anchor","fa fa-bicycle","fa fa-diamond","fa fa-bomb","fa fa-leaf","fa fa-bomb","fa fa-bolt",
+"fa fa-bicycle","fa fa-paper-plane-o","fa fa-cube"];
 
 
 /*
@@ -9,6 +11,7 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -23,6 +26,13 @@ function shuffle(array) {
     }
 
     return array;
+}
+
+function startGame(){
+for (var i =0; i < cardArray.length; i++){
+ i.className.remove("show");
+shuffle(cardArray);
+}
 }
 
 
