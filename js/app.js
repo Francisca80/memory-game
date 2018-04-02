@@ -1,35 +1,35 @@
 /*
  * Create a list that holds all of your cards
  */
-const cardArray= [
-    "fa-diamond",
-    "fa fa-paper-plane-o",
-    "fa fa-anchor",
-    "fa fa-bolt",
-    "fa fa-cube",
-    "fa fa-leaf",
-    "fa fa-anchor",
-    "fa fa-bicycle",
-    "fa fa-diamond",
-    "fa fa-bomb",
-    "fa fa-leaf",
-    "fa fa-bomb",
-    "fa fa-bolt",
-    "fa fa-bicycle",
-    "fa fa-paper-plane-o",
-    "fa fa-cube"
+const cards = [
+    'fa-diamond',
+    'fa-paper-plane-o',
+    'fa-anchor',
+    'fa-bolt',
+    'fa-cube',
+    'fa-leaf',
+    'fa-anchor',
+    'fa-bicycle',
+    'fa-diamond',
+    'fa-bomb',
+    'fa-leaf',
+    'fa-bomb',
+    'fa-bolt',
+    'fa-bicycle',
+    'fa-paper-plane-o',
+    'fa-cube'
   ];
 
 /* een refentie naar de open en matched en shuffled kaarten.
 */
 
-let openCards: [];
-let matchedCards [];
-let shuffledCards [];
+let openCards = [];
+let matchedCards = [];
+let shuffledCards = [];
 
 /* refeentie naar alle ids
 */
-const deck = create.getElementById('deck');
+const deck = document.getElementById('deck');
 
 /*
  * Display the cards on the page
@@ -38,21 +38,22 @@ const deck = create.getElementById('deck');
  *   - add each card's HTML to the page
  */
 
-function initGame();
- shuffledCards = shuffle(cardArray);
+function initGame() {
+ shuffledCards = shuffle(cards);
  createDeck(shuffledCards);
 }
 
 function createDeck(shuffledCards){
-  for(var i = 0;i ,shuffledCards.lenght;i++){
-    let li = document.createElement('li');
-    let i = document.createElement('i');
-    i.classList.add('fa');
-    i.classList.add(shuffledCards[i]);
-    li.appendChild(i);
-    deck.appendChild(li);
+  for(var i = 0;i < shuffledCards.length; i++){
+    let liEl = document.createElement('li');
+    liEl.classList.add('card');
+    let iEl = document.createElement('i');
+    iEl.classList.add('fa');
+    iEl.classList.add(shuffledCards[i]);
+    liEl.appendChild(iEl);
+    deck.appendChild(liEl);
 
-    li.addEventListener(click.turnCard);
+    liEl.addEventListener('click', turnCard);
   }
 }
 
@@ -70,11 +71,50 @@ function shuffle(array) {
     }
 
     return array;
+}
+function turnCard(event){
+  event.target.classList.add('show');
+  event.target.removeEventListener('click', turnCard);
+  checkCards(event);
+}
 
-function turnCard(event){}
+  function checkCards(event){
+    openCards.push(event.target.firstChild);
+
+    if (openCards.length === 2) {
+      if (openCards[0].classname === openCards[1].classname){
+
+        openCards[0].parentNode.classlist.add('matched');
+        openCards[1].parentNode.classlist.add('matched');
+        openCards = [];
+
+      matchedCards.push(openCards[0]);
+      matchedCards.push(openCards[1]);
+        } else {
+          setTimeout(function() {
+            for (let i = 0; i < openCards.length; i++) {
+              openCards[i].parentNode.addEventListener('click', turnCard);
+            }
+          }, 1000);
+
+          setTimeout(removeOpenClass, 1000);
+        }
+    }
+}
 
 
-  initGame();  
+function removeOpenClass() {
+
+   for (let i = 0; i < openCards.length; i++) {
+        openCards[i].parentNode.classList.remove('show');
+    }
+
+
+openCards = [];
+}
+
+initGame();
+
 /*Write a code which will add cards on page - you have exemplary code in HTML file,
  how this can looks like... You can use for this for example for loop and
   innerHTML method to add elements <li> for example to element <ul> in HTML file,
