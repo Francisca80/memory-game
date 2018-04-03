@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-const cards = [
+const cards =[
     'fa-diamond',
     'fa-paper-plane-o',
     'fa-anchor',
@@ -20,14 +20,19 @@ const cards = [
     'fa-cube'
   ];
 
-/* een refentie naar de open en matched en shuffled kaarten.
+/* a refence to the matched and shuffledCards.
 */
 
 let openCards = [];
 let matchedCards = [];
 let shuffledCards = [];
+let moves= 0;
+let timer=0;
 
-/* refeentie naar alle ids
+
+
+
+/* reference to all id's
 */
 const deck = document.getElementById('deck');
 
@@ -38,13 +43,23 @@ const deck = document.getElementById('deck');
  *   - add each card's HTML to the page
  */
 
-function initGame() {
+function initGame(){
+
+  /* shuffle the cards and assign them to shuffledCards
+  */
  shuffledCards = shuffle(cards);
+
+ /* Call the createDeck function and add shuffledCards as a parameter
+*/
  createDeck(shuffledCards);
 }
 
+/* function to create the deck
+*/
+
 function createDeck(shuffledCards){
-  for(var i = 0;i < shuffledCards.length; i++){
+
+  for(var i = 0;i <shuffledCards.length; i++){
     let liEl = document.createElement('li');
     liEl.classList.add('card');
     let iEl = document.createElement('i');
@@ -53,7 +68,7 @@ function createDeck(shuffledCards){
     liEl.appendChild(iEl);
     deck.appendChild(liEl);
 
-    liEl.addEventListener('click', turnCard);
+    liEl.addEventListener('click', turnCard)
   }
 }
 
@@ -72,24 +87,44 @@ function shuffle(array) {
 
     return array;
 }
+
+/* function to turn the cards,event target is li.card
+    event is the clicked card.
+*/
+
 function turnCard(event){
+
+  /* add the class show to event.target.*/
   event.target.classList.add('show');
+
+  /*remove the eventlistener to avoid doubleclik and fill the opencards array
+  with to times te same card,when no match was fount the listener gets added again.*/
+
   event.target.removeEventListener('click', turnCard);
   checkCards(event);
-}
 
-  function checkCards(event){
+}
+  /* function to check the cards and add them to the matched cards array of put the eventlistener back*/
+  function checkCards(event) {
+  /*add the cards to the opencards array*/
+
     openCards.push(event.target.firstChild);
 
+  /*Check opencards array*/
     if (openCards.length === 2) {
+/*      ++moves;
+      totalMoves.innerHTML = `Moves: ${moves}`;
+*/
       if (openCards[0].classname === openCards[1].classname){
 
         openCards[0].parentNode.classlist.add('matched');
         openCards[1].parentNode.classlist.add('matched');
+
         openCards = [];
 
       matchedCards.push(openCards[0]);
       matchedCards.push(openCards[1]);
+
         } else {
           setTimeout(function() {
             for (let i = 0; i < openCards.length; i++) {
@@ -103,8 +138,14 @@ function turnCard(event){
 }
 
 
-function removeOpenClass() {
+/*if (moves == 15){
+  stars.removeChild (star3);
+} else if (moves == 25){
+  stars.removeChild (star2);
+}
+*/
 
+function removeOpenClass() {
    for (let i = 0; i < openCards.length; i++) {
         openCards[i].parentNode.classList.remove('show');
     }

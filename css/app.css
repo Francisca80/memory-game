@@ -75,10 +75,15 @@ h1 {
     font-size: 33px;
 }
 
-.deck .card.match {
-    cursor: default;
-    background: #02ccba;
-    font-size: 33px;
+.matched {
+ animation: bounce0.5s;
+ animation: bounce 200ms 2 linear;
+ background-color: transparent;
+}
+.deck .card.matched {
+  box-shadow: 0px 0px 10px 10px rgba(115, 42, 115, 0.76);
+  transition: box-shadow 500ms;
+  transform: rotateY(180deg);
 }
 
 /*
