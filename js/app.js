@@ -26,7 +26,10 @@ const cards =[
 let openCards = [];
 let matchedCards = [];
 let shuffledCards = [];
+
 let moves= 0;
+let counter = document.querySelector(".moves");
+
 let timer=0;
 
 
@@ -91,6 +94,10 @@ function shuffle(array) {
 /* function to turn the cards,event target is li.card
     event is the clicked card.
 */
+function moveCounter(){
+  moves++;
+     counter.innerHTML= moves;
+}
 
 function turnCard(event){
 
@@ -112,13 +119,12 @@ function turnCard(event){
 
   /*Check opencards array*/
     if (openCards.length === 2) {
-/*      ++moves;
-      totalMoves.innerHTML = `Moves: ${moves}`;
-*/
-      if (openCards[0].classname === openCards[1].classname){
+   moveCounter();
 
-        openCards[0].parentNode.classlist.add('matched');
-        openCards[1].parentNode.classlist.add('matched');
+      if (openCards[0].className === openCards[1].className){
+
+        openCards[0].parentNode.classList.add('matched');
+        openCards[1].parentNode.classList.add('matched');
 
         openCards = [];
 
