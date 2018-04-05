@@ -30,7 +30,11 @@ let shuffledCards = [];
 let moves= 0;
 let counter = document.querySelector(".moves");
 
-let timer=0;
+
+// declare variables for star icons
+const stars = document.querySelectorAll(".fa-star");
+let starsList = document.querySelectorAll(".stars li");
+
 
 
 
@@ -52,6 +56,7 @@ function initGame(){
   */
  shuffledCards = shuffle(cards);
 
+
  /* Call the createDeck function and add shuffledCards as a parameter
 */
  createDeck(shuffledCards);
@@ -72,8 +77,24 @@ function createDeck(shuffledCards){
     deck.appendChild(liEl);
 
     liEl.addEventListener('click', turnCard)
+    liEl.addEventListener("click",winner);
   }
 }
+// reset moves
+   moves = 0;
+   counter.innerHTML = moves;
+   // reset rating
+   for (var i= 0; i < stars.length; i++){
+       stars[i].style.color = "#FFD700";
+       stars[i].style.visibility = "visible";
+   }
+   //reset timer
+   second = 0;
+   minute = 0;
+   hour = 0;
+   var timer = document.querySelector(".timer");
+   timer.innerHTML = "0 mins 0 secs";
+   clearInterval(interval);
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -94,10 +115,8 @@ function shuffle(array) {
 /* function to turn the cards,event target is li.card
     event is the clicked card.
 */
-function moveCounter(){
-  moves++;
-     counter.innerHTML= moves;
-}
+
+
 
 function turnCard(event){
 
@@ -143,13 +162,62 @@ function turnCard(event){
     }
 }
 
+/* reset moves*/
 
-/*if (moves == 15){
-  stars.removeChild (star3);
-} else if (moves == 25){
-  stars.removeChild (star2);
+function moveCounter(){
+    moves++;
+    counter.innerHTML = moves;
+    //start timer on first move
+        if(moves == 1){
+            second = 0;
+            minute = 0;
+            hour = 0;
+            startTimer();
+        }
+// setting rates based on moves
+    if (moves > 8 && moves < 20){
+        for( i= 0; i < 3; i++){
+            if(i > 1){
+                stars[i].style.visibility = "collapse";
+            }
+        }
+    }
+    else if (moves > 21){
+        for( i= 0; i < 3; i++){
+            if(i > 0){
+                stars[i].style.visibility = "collapse";
+            }
+        }
+    }
 }
-*/
+
+// @description game timer
+var second = 0, minute = 0; hour = 0;
+var timer = document.querySelector(".timer");
+var interval;
+function startTimer(){
+    interval = setInterval(function(){
+        timer.innerHTML = minute+"mins "+second+"secs";
+        second++;
+        if(second == 60){
+            minute++;
+            second=0;
+        }
+        if(minute == 60){
+            hour++;
+            minute = 0;
+        }
+    },1000);
+}
+
+function winner(){
+    if (matchedCards.length == 16){
+        clearInterval(interval);
+        finalTime = timer.innerHTML;
+    };
+}
+
+
 
 function removeOpenClass() {
    for (let i = 0; i < openCards.length; i++) {
@@ -161,6 +229,8 @@ openCards = [];
 }
 
 initGame();
+
+
 
 /*Write a code which will add cards on page - you have exemplary code in HTML file,
  how this can looks like... You can use for this for example for loop and
