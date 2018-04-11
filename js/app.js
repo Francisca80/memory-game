@@ -1,3 +1,4 @@
+
 /*
  * Create a list that holds all of your cards
  */
@@ -77,7 +78,7 @@ function createDeck(shuffledCards){
     deck.appendChild(liEl);
 
     liEl.addEventListener('click', turnCard)
-    liEl.addEventListener("click",winner);
+    liEl.addEventListener("click",winGame);
   }
 }
 // reset moves
@@ -210,9 +211,11 @@ function startTimer(){
     },1000);
 }
 
-function winner(){
+function winGame(){
     if (matchedCards.length == 16){
         clearInterval(interval);
+        modal.style.display = "block";
+
         finalTime = timer.innerHTML;
     };
 }
