@@ -159,6 +159,7 @@ h1 {
 	padding: 20px;
 	width: 80%;
 	border-radius: 5px;
+  	text-align: center;
 }
 .modal-header , .modal-footer{
 	padding: 10px;
@@ -167,6 +168,35 @@ h1 {
 	text-align: center;
 }
 
+/* The Close Button */
+.close {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+.info-wrap{
+	padding: 10px;
+	text-align: center;
+}
+a.btn{
+	background-color: #f44336;
+	color: white;
+	padding: 14px 25px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+a.btn:hover, a.btn:active {
+	background-color: red;
+}
 
 .modal-footer{
 	text-align: center;

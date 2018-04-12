@@ -37,9 +37,10 @@ const stars = document.querySelectorAll(".fa-star");
 let starsList = document.querySelectorAll(".stars li");
 
 
-
-
-
+let modal = document.querySelector('.modal');
+let closeicon = document.querySelector(".close");
+let restartGame = document.querySelector(".restart");
+let playAgain = document.querySelector(".btn.playagain");
 /* reference to all id's
 */
 const deck = document.getElementById('deck');
@@ -61,6 +62,7 @@ function initGame(){
  /* Call the createDeck function and add shuffledCards as a parameter
 */
  createDeck(shuffledCards);
+
 }
 
 /* function to create the deck
@@ -78,6 +80,7 @@ function createDeck(shuffledCards){
     deck.appendChild(liEl);
 
     liEl.addEventListener('click', turnCard);
+
   }
 }
 // reset moves
@@ -149,8 +152,8 @@ function turnCard(event){
 
       matchedCards.push(openCards[0]);
       matchedCards.push(openCards[1]);
-
-    } if (matchedCards === 16) { winGame() };
+   console.log (matchedCards);
+ } if (matchedCards.length === 16) { winGame() };
       }
       else {
         setTimeout(function() {
@@ -211,13 +214,35 @@ function startTimer(){
     },1000);
 }
 
+
+	restartGame.addEventListener("click", initGame);
+	// function restart(){
+	// 	startGame();
+
+
 function winGame(){
         clearInterval(interval);
         modal.style.display = "block";
-        finalTime = timer.innerHTML;
+
+        let finalTime = document.querySelector(".timer").innerHTML;
+			     document.querySelector('.totalTime').innerHTML = finalTime;
+
+        let starFinal = document.querySelector(".stars").innerHTML;
+           			 document.querySelector('.totalRating').innerHTML = starFinal ;
+
+        let finalMove = document.querySelector(".moves").innerHTML;
+        document.querySelector('.totalMoves').innerHTML = finalMove;
+          closeModal();
+
     };
 
+function closeModal(){
+        	closeicon.addEventListener("click", function(e){
+    	          modal.style.display = "none";
 
+    	        initGame();
+        	});
+    	}
 
 
 function removeOpenClass() {
@@ -225,7 +250,11 @@ function removeOpenClass() {
         openCards[i].parentNode.classList.remove('show');
     }
 
-
+    function playAgain(){
+      pAgain.addEventListener("click" , function(e){
+              modal.style.display = "none";
+        initGame();
+  	});
 openCards = [];
 }
 
