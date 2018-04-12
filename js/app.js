@@ -77,8 +77,7 @@ function createDeck(shuffledCards){
     liEl.appendChild(iEl);
     deck.appendChild(liEl);
 
-    liEl.addEventListener('click', turnCard)
-    liEl.addEventListener("click",winGame);
+    liEl.addEventListener('click', turnCard);
   }
 }
 // reset moves
@@ -151,17 +150,18 @@ function turnCard(event){
       matchedCards.push(openCards[0]);
       matchedCards.push(openCards[1]);
 
-        } else {
-          setTimeout(function() {
+    } if (matchedCards === 16) { winGame() };
+      }
+      else {
+        setTimeout(function() {
             for (let i = 0; i < openCards.length; i++) {
               openCards[i].parentNode.addEventListener('click', turnCard);
             }
           }, 1000);
-
           setTimeout(removeOpenClass, 1000);
+            }
         }
-    }
-}
+
 
 /* reset moves*/
 
@@ -212,13 +212,11 @@ function startTimer(){
 }
 
 function winGame(){
-    if (matchedCards.length == 16){
         clearInterval(interval);
         modal.style.display = "block";
-
         finalTime = timer.innerHTML;
     };
-}
+
 
 
 
