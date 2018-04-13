@@ -33,16 +33,16 @@ let counter = document.querySelector(".moves");
 
 // declare variables for star icons
 const stars = document.querySelectorAll(".fa-star");
-let starsList = document.querySelectorAll(".stars li");
 
 
-let modal = document.querySelector('.modal');
+
+let modal = document.querySelector(".modal");
 let closeicon = document.querySelector(".close");
-let restartGame = document.querySelector(".restart");
-let playAgain = document.querySelector(".btn.playagain");
+
+let pAgain = document.querySelector(".btn.playagain");
 /* reference to all id's
  */
-const deck = document.getElementById('deck');
+const deck = document.getElementById("deck");
 
 /*
  * Display the cards on the page
@@ -58,27 +58,16 @@ function initGame() {
     shuffledCards = shuffle(cards);
 
 
-    /* Call the createDeck function and add shuffledCards as a parameter
-     */
-    createDeck(shuffledCards);
 
-}
-
-/* function to create the deck
- */
-
-function createDeck(shuffledCards) {
-
-    for (var i = 0; i < shuffledCards.length; i++) {
-        let liEl = document.createElement('li');
-        liEl.classList.add('card');
-        let iEl = document.createElement('i');
-        iEl.classList.add('fa');
+    for (let i = 0; i < shuffledCards.length; i++) {
+        let liEl = document.createElement("li");
+        liEl.classList.add("card");
+        let iEl = document.createElement("i");
+        iEl.classList.add("fa");
         iEl.classList.add(shuffledCards[i]);
         liEl.appendChild(iEl);
         deck.appendChild(liEl);
-
-        liEl.addEventListener('click', turnCard);
+        liEl.addEventListener("click", turnCard);
 
     }
 }
@@ -124,12 +113,12 @@ function shuffle(array) {
 function turnCard(event) {
 
     /* add the class show to event.target.*/
-    event.target.classList.add('show');
+    event.target.classList.add("show");
 
     /*remove the eventlistener to avoid doubleclik and fill the opencards array
     with to times te same card,when no match was fount the listener gets added again.*/
+    event.target.removeEventListener("click", turnCard);
 
-    event.target.removeEventListener('click', turnCard);
     checkCards(event);
 
 }
@@ -145,22 +134,23 @@ function checkCards(event) {
 
         if (openCards[0].className === openCards[1].className) {
 
-            openCards[0].parentNode.classList.add('matched');
-            openCards[1].parentNode.classList.add('matched');
+          openCards[0].parentNode.classList.add('matched');
+          openCards[1].parentNode.classList.add('matched');
+
 
             openCards = [];
 
             matchedCards.push(openCards[0]);
             matchedCards.push(openCards[1]);
-            console.log(matchedCards);
+
         }
         if (matchedCards.length === 16) {
             winGame()
-        };
+        }
     } else {
         setTimeout(function() {
             for (let i = 0; i < openCards.length; i++) {
-                openCards[i].parentNode.addEventListener('click', turnCard);
+                openCards[i].parentNode.addEventListener("click", turnCard);
             }
         }, 1000);
         setTimeout(removeOpenClass, 1000);
@@ -219,26 +209,28 @@ function startTimer() {
 }
 
 
-restartGame.addEventListener("click", initGame);
-// function restart(){
-// 	startGame();
-
+function removeOpenClass() {
+    for (let i = 0; i < openCards.length; i++) {
+        openCards[i].parentNode.classList.remove("show");
+    }
+}
 
 function winGame() {
     clearInterval(interval);
     modal.style.display = "block";
 
     let finalTime = document.querySelector(".timer").innerHTML;
-    document.querySelector('.totalTime').innerHTML = finalTime;
+    document.querySelector(".totalTime").innerHTML = finalTime;
 
     let starFinal = document.querySelector(".stars").innerHTML;
-    document.querySelector('.totalRating').innerHTML = starFinal;
+    document.querySelector(".totalRating").innerHTML = starFinal;
 
     let finalMove = document.querySelector(".moves").innerHTML;
-    document.querySelector('.totalMoves').innerHTML = finalMove;
+    document.querySelector(".totalMoves").innerHTML = finalMove;
     closeModal();
+    playAgain();
 
-};
+}
 
 function closeModal() {
     closeicon.addEventListener("click", function(e) {
@@ -249,10 +241,6 @@ function closeModal() {
 }
 
 
-function removeOpenClass() {
-    for (let i = 0; i < openCards.length; i++) {
-        openCards[i].parentNode.classList.remove('show');
-    }
 
     function playAgain() {
         pAgain.addEventListener("click", function(e) {
@@ -263,18 +251,3 @@ function removeOpenClass() {
     }
 
     initGame();
-
-/*Write a code which will add cards on page - you have exemplary code in HTML file,
- how this can looks like... You can use for this for example for loop and
-  innerHTML method to add elements <li> for example to element <ul> in HTML file,
-in which you will have your cards ... For example in <div> or <span> elements...
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
