@@ -2,22 +2,22 @@
  * Create a list that holds all of your cards
  */
 const cards = [
-    'fa-diamond',
-    'fa-paper-plane-o',
-    'fa-anchor',
-    'fa-bolt',
-    'fa-cube',
-    'fa-leaf',
-    'fa-anchor',
-    'fa-bicycle',
-    'fa-diamond',
-    'fa-bomb',
-    'fa-leaf',
-    'fa-bomb',
-    'fa-bolt',
-    'fa-bicycle',
-    'fa-paper-plane-o',
-    'fa-cube'
+    "fa-diamond",
+    "fa-paper-plane-o",
+    "fa-anchor",
+    "fa-bolt",
+    "fa-cube",
+    "fa-leaf",
+    "fa-anchor",
+    "fa-bicycle",
+    "fa-diamond",
+    "fa-bomb",
+    "fa-leaf",
+    "fa-bomb",
+    "fa-bolt",
+    "fa-bicycle",
+    "fa-paper-plane-o",
+    "fa-cube"
 ];
 
 /* a refence to the matched and shuffledCards.
@@ -31,17 +31,13 @@ let moves = 0;
 let counter = document.querySelector(".moves");
 
 
-// declare variables for star icons
 const stars = document.querySelectorAll(".fa-star");
-
-
 
 let modal = document.querySelector(".modal");
 let closeicon = document.querySelector(".close");
 
 let pAgain = document.querySelector(".btn.playagain");
-/* reference to all id's
- */
+
 const deck = document.getElementById("deck");
 
 /*
@@ -57,9 +53,14 @@ function initGame() {
      */
     shuffledCards = shuffle(cards);
 
+    createDeck(shuffledCards);
+}
 
+/* function to create the deck
+ */
+function createDeck(shuffledCards) {
 
-    for (let i = 0; i < shuffledCards.length; i++) {
+    for (var i = 0; i < shuffledCards.length; i++) {
         let liEl = document.createElement("li");
         liEl.classList.add("card");
         let iEl = document.createElement("i");
@@ -68,17 +69,19 @@ function initGame() {
         liEl.appendChild(iEl);
         deck.appendChild(liEl);
         liEl.addEventListener("click", turnCard);
-
     }
 }
+
 // reset moves
 moves = 0;
 counter.innerHTML = moves;
+
 // reset rating
 for (var i = 0; i < stars.length; i++) {
     stars[i].style.color = "#FFD700";
     stars[i].style.visibility = "visible";
 }
+
 //reset timer
 second = 0;
 minute = 0;
@@ -108,8 +111,6 @@ function shuffle(array) {
     event is the clicked card.
 */
 
-
-
 function turnCard(event) {
 
     /* add the class show to event.target.*/
@@ -128,15 +129,14 @@ function checkCards(event) {
 
     openCards.push(event.target.firstChild);
 
+    console.log(openCards);
     /*Check opencards array*/
     if (openCards.length === 2) {
         moveCounter();
 
         if (openCards[0].className === openCards[1].className) {
-
-          openCards[0].parentNode.classList.add('matched');
-          openCards[1].parentNode.classList.add('matched');
-
+            openCards[0].parentNode.classList.add("matched");
+            openCards[1].parentNode.classList.add("matched");
 
             openCards = [];
 
@@ -144,8 +144,8 @@ function checkCards(event) {
             matchedCards.push(openCards[1]);
 
         }
-        if (matchedCards.length === 16) {
-            winGame()
+        if (matchedCards === 16); {
+            winGame();
         }
     } else {
         setTimeout(function() {
@@ -209,12 +209,6 @@ function startTimer() {
 }
 
 
-function removeOpenClass() {
-    for (let i = 0; i < openCards.length; i++) {
-        openCards[i].parentNode.classList.remove("show");
-    }
-}
-
 function winGame() {
     clearInterval(interval);
     modal.style.display = "block";
@@ -229,25 +223,29 @@ function winGame() {
     document.querySelector(".totalMoves").innerHTML = finalMove;
     closeModal();
     playAgain();
-
 }
+
 
 function closeModal() {
     closeicon.addEventListener("click", function(e) {
         modal.style.display = "none";
-
         initGame();
     });
 }
 
 
+function playAgain() {
+    pAgain.addEventListener("click", function(e) {
+        modal.style.display = "none";
+        initGame();
+    });
 
-    function playAgain() {
-        pAgain.addEventListener("click", function(e) {
-            modal.style.display = "none";
-            initGame();
-        });
-        openCards = [];
+}
+
+function removeOpenClass() {
+    for (let i = 0; i < openCards.length; i++) {
+        openCards[i].parentNode.classList.remove("show");
     }
-
-    initGame();
+}
+openCards = [];
+initGame();
