@@ -138,16 +138,17 @@ function checkCards(event) {
             openCards[0].parentNode.classList.add("matched");
             openCards[1].parentNode.classList.add("matched");
 
-            openCards = [];
 
             matchedCards.push(openCards[0]);
             matchedCards.push(openCards[1]);
 
         }
-        if (matchedCards === 16); {
+        if (matchedCards === 16) {
             winGame();
         }
+        openCards = [];
     } else {
+
         setTimeout(function() {
             for (let i = 0; i < openCards.length; i++) {
                 openCards[i].parentNode.addEventListener("click", turnCard);
