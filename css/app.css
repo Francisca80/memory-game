@@ -34,9 +34,11 @@ body {
 h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 500;
-    color:#FFD700;
-    background-color: #02b3e4;
+    color: #3B4CCA;
+    background-color: #ffffff;
+    text-align: center;
 }
+
 
 /*
  * Styles for the deck of cards
@@ -46,6 +48,10 @@ h1 {
     width: 100%;
 }
 
+.imgheader {
+   visibility: visible;
+
+}
 
 .deck {
     width: 660px;
@@ -117,26 +123,31 @@ h1 {
  * Styles for the Score Panel
  */
 
-.score-panel {
-    text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
-}
+ .score-panel {
+ 	text-align: left;
+ 	margin-bottom: 10px;
+  background-color: #ffffff;
+ }
 
-.score-panel .stars {
+
+.stars {
+
     margin: 0;
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
-    background-color: #02b3e4;
+
 }
 
-.score-panel .stars li {
+
+
+
+.stars li {
     list-style: none;
     display: inline-block;
 }
 
-.score-panel .restart {
+ .restart {
     float: right;
     cursor: pointer;
 }
@@ -145,21 +156,23 @@ h1 {
 	color: #FFD700;
 }
 
-.timer {
-	display: inline-block;
-	margin: 0 1rem;
-  background-color: #02b3e4;
-  color: #FFD700
-}
+ .timer {
+  display: inline-block;
+  	margin: 0 1rem;
+  }
 
 
-#starRating li {
-	display: inline-block;
+
+ .pair-count {
+  display: inline-block;
+  	margin: 0 1rem;
+
 }
+
 
 /*Modal */
 
-.modal {
+.popup {
 	display: none;
 	position: fixed;
 	z-index: 1;
@@ -180,13 +193,15 @@ h1 {
 }
 
 .modal-content {
-	background-color: #fefefe;
+	color:  #3B4CCA;
+  background-color: #ffffff;
 	margin: auto;
 	padding: 20px;
 	width: 80%;
 	border-radius: 5px;
   	text-align: center;
 }
+
 .modal-header , .modal-footer{
 	padding: 10px;
 }
@@ -212,29 +227,24 @@ h1 {
 	padding: 10px;
 	text-align: center;
 }
-a.btn{
-	background-color: #f44336;
-	color: white;
-	padding: 14px 25px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
+.totalRating li{
+  	display: inline-block;
+  }
+
+
+
+#play-again{
+  background-color: #FFDE00;
+	padding: 0.7rem 1rem;
+	font-size: 1.1rem;
+	display: block;
+	margin: 0 auto;
+	width: 50%;
+	color: #3B4CCA;
+	border-radius: 5px;
 }
-a.btn:hover, a.btn:active {
-	background-color: red;
-}
+
 
 .modal-footer{
 	text-align: center;
 }
-
-/* Media Queries
-	 */
-
-/* @media screen and (max-width: 550px){
-}
-@media screen and (max-width: 800px){
-}
-@media screen and (max-width: 960px){
-
-} */

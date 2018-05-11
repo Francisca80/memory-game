@@ -38,7 +38,7 @@ const cardsAll = [
         name: 'pikachu',
         img:"img/008-pikachu.png"
     }
-]; 
+];
 
 //create pairs
 
@@ -46,28 +46,27 @@ const cards = cardsAll
     .concat(cardsAll);
 
 
-/* a refence to the matched and shuffledCards.
- */
+const deck = document.querySelector(".deck");//deck element with the cards
+const card = document.querySelectorAll(".card"); //card element
 
 let openCards = [];
-let matchedCards = document.getElementsByClassName("card open show matched");
+
+
+let pairs= [];
+let matches = 0;
+
 
 
 let moves = 0;
 let counter = document.querySelector(".moves");
-
-let pairs= [];
-let matches = 0;
-let pairedCards = document.getElementsByClassName("card open show match");
 const stars = document.querySelectorAll(".fa-star");
 
-let modal = document.querySelector(".modal");
+let modal = document.querySelector(".popup");
 let closeicon = document.querySelector(".close");
 
-let pAgain = document.querySelector(".btn.playagain");
 
-const deck = document.querySelector(".deck");//deck element with all the acrads
-const card = document.querySelectorAll(".card"); //card element
+
+
 
 
 /*
@@ -161,6 +160,8 @@ function removeMatch() {
     }
     matches = 0;
 }
+
+
 // reset moves
 moves = 0;
 counter.innerHTML = moves;
@@ -211,9 +212,9 @@ function moveCounter() {
 }
 
 // @description game timer
-var second = 0,
+var second = 0;
     minute = 0;
-hour = 0;
+
 var timer = document.querySelector(".timer");
 var interval;
 
@@ -241,6 +242,36 @@ function countPairs() {
     pairsNo.innerText = pairsCount;
 }
 
+/* *** *** NEW GAME *** *** */
+function initGame() {
+
+
+    //reset pairs
+    pairs = [];
+    pairsNo.innerText = 0;
+
+    //reset open cards
+      openCards = [];
+
+     // reset moves
+     moves = 0;
+     counter.innerHTML = moves;
+    // reset star rating
+    for (var i= 0; i < stars.length; i++){
+        stars[i].style.color = "#FFD700";
+        stars[i].style.visibility = "visible";
+    }
+    var timer = document.querySelector(".timer");
+    timer.innerHTML = "0 mins 0 secs";
+    clearInterval(interval);
+
+    //remove previous matches
+        removeMatch();
+        //play
+        shuffle(cards);
+
+}
+
 function winGame() {
     clearInterval(interval);
     modal.style.display = "block";
@@ -254,23 +285,24 @@ function winGame() {
     let finalMove = document.querySelector(".moves").innerHTML;
     document.querySelector(".totalMoves").innerHTML = finalMove;
     closeModal();
-    playAgain();
+
 }
 
 
 function closeModal() {
-    closeicon.addEventListener("click", function(e) {
-        modal.style.display = "none";
+    closeicon.addEventListener("click", function(event) {
+      modal.style.display = "none";
+
+
         initGame();
     });
 }
 
 
 function playAgain() {
-    pAgain.addEventListener("click", function(e) {
-        modal.style.display = "none";
+              modal.style.display = "none";
         initGame();
-    });
+
 
 }
 
@@ -278,3 +310,4 @@ function playAgain() {
 
 // Event listener -> on click on deck, flip card
 deck.addEventListener('click', turnCard);
+// Event listener -> on click on restart button ->restart the game
