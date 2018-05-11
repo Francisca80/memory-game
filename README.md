@@ -1,18 +1,18 @@
-Memory Game Project
+## Memory Game Project
 
-Challenge
+## Challenge
 Match cards in less time with less moves.
 
-How to Play
+##How to Play
 Load this link in your browser https:\\apenstaartjes.net\memory.html
 
-Instructions
+##Instructions
 Click on a card and find the matching Pokemon.
 Keep revealing cards and working your memory to remember each unveiled card.
 Match cards properly with less moves and in faster time
 
 
-How I built the Memory Game
+##How I built the Memory Game
 After following the JScourses on Udacity,
 I build this game with JS,CSS and HTML.
 
@@ -22,6 +22,7 @@ The game has
  added effects to cards when they match
  create a pop-up modal when player finds all the pokemon.
 
+Have fun playing my game!
 
 ## Table of Contents
 
