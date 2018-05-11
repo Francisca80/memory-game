@@ -3,16 +3,16 @@
 ## Challenge
 Match cards in less time with less moves.
 
-##How to Play
+## How to Play
 Load this link in your browser https:\\apenstaartjes.net\memory.html
 
-##Instructions
+## Instructions
 Click on a card and find the matching Pokemon.
 Keep revealing cards and working your memory to remember each unveiled card.
 Match cards properly with less moves and in faster time
 
 
-##How I built the Memory Game
+## How I made the Memory Game
 After following the JScourses on Udacity,
 I build this game with JS,CSS and HTML.
 
