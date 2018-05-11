@@ -3,6 +3,9 @@
 ## Challenge
 Match cards in less time with less moves.
 
+![Playingscreen](img/pokemonscreen.png)
+
+
 ## How to Play
 Load this link in your browser https:\\apenstaartjes.net\memory.html
 
