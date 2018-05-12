@@ -8,7 +8,7 @@ Match the Pokemon in less time with less moves.
 
 
 ## How to Play
-Load this link in your browser 
+Load this link in your browser https://francisca80.github.io/memory-game/
 
 ## Instructions on how to play the matching game
 
@@ -26,11 +26,12 @@ Have fun playing my  matching game!
 
 
 
-## Instructions 
 
-## How I made the Memory Game
+
+## Why I made the Memory Game and what is in it.
+
 After following the JScourses on Udacity,
-I build this game with JS,CSS and HTML.
+I build this project as part of the nanodegree course with JS,CSS and HTML.
 
 The game has
  -a deck of cards that shuffles when game is refreshed.
@@ -40,12 +41,7 @@ The game has
  -a pop-up modal when player finds all the pokemon with your scores.
   
   
-  starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
+  s
 ## Resources
 
 The resources I used to make this game are:
