@@ -50,37 +50,16 @@ const cardsAll = [{
 const cards = cardsAll
   .concat(cardsAll);
 
-
 const deck = document.querySelector(".deck"); //deck element with the cards
 const card = document.querySelectorAll(".card"); //card element
-
 let openCards = [];
-
-
 let pairs = [];
 let matches = 0;
-
-
-
 let moves = 0;
 let counter = document.querySelector(".moves");
 const stars = document.querySelectorAll(".fa-star");
-
 let modal = document.querySelector(".popup");
 let closeicon = document.querySelector(".close");
-
-
-
-
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 
@@ -112,6 +91,7 @@ function createDeck() {
 }
 
 function turnCard(event) {
+  moveCounter()
   if (!event.target.classList.contains('card')) return; // If the target isn't a card, stop the function
 
   if (openCards.length < 2) {
@@ -121,19 +101,11 @@ function turnCard(event) {
   if (openCards.length == 2) {
     deck.removeEventListener('click', turnCard); // to stop from further clicking on cards until animation is finished
     checkMatch(openCards[0], openCards[1]);
+    ;
   }
 
 }
-/* add the class show to event.target.*/
-//  event.target.classList.add("show");
 
-/*remove the eventlistener to avoid doubleclik and fill the opencards array
-with to times te same card,when no match was fount the listener gets added again.*/
-//  event.target.removeEventListener("click", turnCard);
-
-//  checkCards(event);
-
-//}
 /* *** *** MATCH & UNMATCH COMPARISON *** *** */
 
 function checkMatch(a, b) {
@@ -154,8 +126,9 @@ function checkMatch(a, b) {
     }
     openCards = [];
     deck.addEventListener('click', turnCard)
+
   }, 750);
-  moveCounter();
+
 }
 /* *** *** REMOVE MATCH*** *** */
 //removes all classes with open show match
@@ -166,17 +139,14 @@ function removeMatch() {
   matches = 0;
 }
 
-
 // reset moves
 moves = 0;
 counter.innerHTML = moves;
-
 // reset rating
 for (var i = 0; i < stars.length; i++) {
   stars[i].style.color = "#FFD700";
   stars[i].style.visibility = "visible";
 }
-
 //reset timer
 second = 0;
 minute = 0;
@@ -184,9 +154,6 @@ hour = 0;
 var timer = document.querySelector(".timer");
 timer.innerHTML = "0 mins 0 secs";
 clearInterval(interval);
-
-
-
 
 /* reset moves*/
 
@@ -219,7 +186,6 @@ function moveCounter() {
 // @description game timer
 var second = 0;
 minute = 0;
-
 var timer = document.querySelector(".timer");
 var interval;
 
@@ -249,15 +215,11 @@ function countPairs() {
 
 /* *** *** NEW GAME *** *** */
 function initGame() {
-
-
   //reset pairs
   pairs = [];
   pairsNo.innerText = 0;
-
   //reset open cards
   openCards = [];
-
   // reset moves
   moves = 0;
   counter.innerHTML = moves;
@@ -274,7 +236,6 @@ function initGame() {
   removeMatch();
   //play
   shuffle(cards);
-
 }
 
 function winGame() {
@@ -293,7 +254,6 @@ function winGame() {
 
 }
 
-
 function closeModal() {
   closeicon.addEventListener("click", function(event) {
     modal.style.display = "none";
@@ -303,16 +263,10 @@ function closeModal() {
   });
 }
 
-
 function playAgain() {
   modal.style.display = "none";
   initGame();
-
-
 }
-
-
 
 // Event listener -> on click on deck, flip card
 deck.addEventListener('click', turnCard);
-// Event listener -> on click on restart button ->restart the game
