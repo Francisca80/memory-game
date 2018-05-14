@@ -91,17 +91,19 @@ function createDeck() {
 }
 
 function turnCard(event) {
-  moveCounter()
+
   if (!event.target.classList.contains('card')) return; // If the target isn't a card, stop the function
 
-  if (openCards.length < 2) {
+  if (openCards.length < 2)
+{
     event.target.classList.add("open", "show");
     openCards.push(event.target);
+    moveCounter()
   }
   if (openCards.length == 2) {
     deck.removeEventListener('click', turnCard); // to stop from further clicking on cards until animation is finished
     checkMatch(openCards[0], openCards[1]);
-    ;
+
   }
 
 }
@@ -109,7 +111,9 @@ function turnCard(event) {
 /* *** *** MATCH & UNMATCH COMPARISON *** *** */
 
 function checkMatch(a, b) {
-  setTimeout(function() {
+
+  setTimeout(function()
+ {
     if (a.dataset.id == b.dataset.id) {
       //* if the cards match *//
       openCards[0].classList.add("matched");
@@ -159,6 +163,7 @@ clearInterval(interval);
 
 function moveCounter() {
   moves++;
+
   counter.innerHTML = moves;
   //start timer on first move
   if (moves == 1) {
@@ -168,13 +173,13 @@ function moveCounter() {
     startTimer();
   }
   // setting rates based on moves
-  if (moves > 10 && moves < 20) {
+  if (moves > 20 && moves < 30) {
     for (i = 0; i < 3; i++) {
       if (i > 1) {
         stars[i].style.visibility = "collapse";
       }
     }
-  } else if (moves > 21) {
+  } else if (moves > 31) {
     for (i = 0; i < 3; i++) {
       if (i > 0) {
         stars[i].style.visibility = "collapse";
